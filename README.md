@@ -8,27 +8,31 @@ This repository contains data analysis, machine learning, and backend data pipel
 	- Folder: Car Price
 	- Focus: Regression modeling for car price estimation
 
-2. File Handling
+2. CardioRisk Prediction
+	- Folder: CardioRisk
+	- Focus: Cardiovascular disease risk classification
+
+3. File Handling
 	- Folder: File Handling
 	- Focus: CSV processing and Python file operations
 
-3. Flight Data Analysis
+4. Flight Data Analysis
 	- Folder: Flight Mini assignmrnt
 	- Focus: Exploratory data analysis of flight records
 
-4. Lung Cancer Analysis
+5. Lung Cancer Analysis
 	- Folder: Lung Cancer Mini Assignment
 	- Focus: Patient health data exploration
 
-5. NYC Taxi Analysis
+6. NYC Taxi Analysis
 	- Folder: NYC Taxi Analysis
 	- Focus: EDA on NYC taxi trips
 
-6. Traffic Data ETL
+7. Traffic Data ETL
 	- Folder: Traffic Data Analysis
 	- Focus: ETL and analysis of traffic collision data
 
-7. Customer Data Pipeline
+8. Customer Data Pipeline
 	- Folder: customer-data-pipeline
 	- Focus: Containerized ingestion pipeline using Flask, FastAPI, and PostgreSQL
 
@@ -39,6 +43,7 @@ Notebook-based projects typically include:
 - A Jupyter notebook
 - A project-level README
 - Sample data under data/sample
+- Some projects use a full dataset under data/ instead of a sample file
 
 The backend pipeline project includes:
 
@@ -54,6 +59,7 @@ The backend pipeline project includes:
 2. Launch Jupyter for a notebook, for example:
 
 ```bash
+jupyter notebook "CardioRisk/CardioRisk_Prediction.ipynb"
 jupyter notebook "Car Price/CarPricePrediction.ipynb"
 ```
 
