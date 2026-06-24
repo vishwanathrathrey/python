@@ -11,10 +11,12 @@ End-to-end credit risk prediction project for the Home Credit Default Risk datas
 
 ## Run locally
 
+Activate your virtual environment first, then run the commands from the project root.
+
 Backend:
 
 ```powershell
-C:/Users/Vishwanath/AppData/Local/Programs/Python/Python312/python.exe -m uvicorn api.main:app --host 127.0.0.1 --port 8000
+python -m uvicorn api.main:app --host 127.0.0.1 --port 8000
 ```
 
 Frontend:
@@ -28,7 +30,7 @@ npm run dev -- --host 127.0.0.1
 ## Train the model
 
 ```powershell
-C:/Users/Vishwanath/AppData/Local/Programs/Python/Python312/python.exe ml/train_model.py
+python ml/train_model.py
 ```
 
 ## API endpoints
