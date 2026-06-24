@@ -36,6 +36,10 @@ This repository contains data analysis, machine learning, and backend data pipel
 	- Folder: customer-data-pipeline
 	- Focus: Containerized ingestion pipeline using Flask, FastAPI, and PostgreSQL
 
+9. Credit Risk ML System
+	- Folder: credit-risk-ml-system
+	- Focus: End-to-end credit risk prediction system with PySpark ETL, model training, FastAPI, and a React dashboard
+
 ## What Is Inside Each Project
 
 Notebook-based projects typically include:
@@ -84,7 +88,31 @@ curl http://localhost:5000/api/health
 curl http://localhost:8000/api/health
 ```
 
+### Credit Risk ML System
+
+1. Move to the project folder:
+
+```bash
+cd credit-risk-ml-system
+```
+
+2. Start the API and frontend locally:
+
+```bash
+uvicorn api.main:app --host 127.0.0.1 --port 8000
+cd frontend
+npm install
+npm run dev -- --host 127.0.0.1
+```
+
+3. Train the model if needed:
+
+```bash
+python ml/train_model.py
+```
+
 ## Data Notes
 
 - This repository includes sample datasets for learning and demonstration.
 - Full production datasets are not included.
+- The credit risk project uses the Home Credit Default Risk dataset from Kaggle and stores its data notes in `credit-risk-ml-system/data/README.md`.
