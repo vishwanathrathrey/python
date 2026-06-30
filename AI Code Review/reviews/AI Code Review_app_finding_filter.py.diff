@@ -1,0 +1,18 @@
+@@ -0,0 +1,16 @@
++def is_valid_finding(description: str):
++    description = description.lower()
++
++    invalid_phrases = [
++        "no issues found",
++        "no quality issues found",
++        "no security issues found",
++        "no bugs found",
++        "can lead to keyerror",
++        "deprecated api usage",
++    ]
++
++    return not any(
++        phrase in description
++        for phrase in invalid_phrases
++    )
+\ No newline at end of file

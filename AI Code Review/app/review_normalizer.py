@@ -1,22 +1,25 @@
 import json
 
+EMPTY_REVIEW = {
+    "bugs": [],
+    "security": [],
+    "quality": []
+}
+
+
 def normalize_review(raw_json):
 
-    review = json.loads(raw_json)
+    try:
+        review = json.loads(raw_json)
+
+    except json.JSONDecodeError:
+        return EMPTY_REVIEW.copy()
 
     if isinstance(review, list):
-        return {
-            "bugs": [],
-            "security": [],
-            "quality": []
-        }
+        return EMPTY_REVIEW.copy()
 
     if review == {}:
-        return {
-            "bugs": [],
-            "security": [],
-            "quality": []
-        }
+        return EMPTY_REVIEW.copy()
 
     review.setdefault("bugs", [])
     review.setdefault("security", [])

@@ -1,0 +1,12 @@
+@@ -0,0 +1,11 @@
++# AI Code Review Report
++
++## Summary
++
++Critical: 0
++Warning: 1
++Suggestion: 0
++
++## Findings
++
++- [Warning] AI Code Review_app_github_client.py.diff Hardcoded API token in source code (Line 12)

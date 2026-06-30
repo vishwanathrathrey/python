@@ -1,0 +1,85 @@
+@@ -0,0 +1,83 @@
++from app.ollama_client import OllamaClient
++
++client = OllamaClient()
++
++def review_patch(patch: str):
++    prompt = f"""
++You are a senior software engineer performing a pull request review.
++
++Review ONLY the code shown in the diff.
++
++Rules:
++- Do not invent issues.
++- Do not assume missing code exists.
++- Report only issues visible in the diff.
++- Do not report best-practice suggestions unless there is a real problem.
++- If uncertain, return empty arrays.
++- Every finding must reference code that exists in the diff.
++- If you cannot point to a specific line in the diff, do not report the issue.
++- Do not suggest hypothetical improvements.
++- Do not flag code as insecure unless the vulnerability is visible in the diff.
++- Do not flag code as deprecated unless the deprecated API is explicitly shown in the diff.
++- Recommendations must be specific and actionable.
++- Recommendations must address the reported issue.
++- If no bugs, security issues, or quality concerns are found, return empty arrays.
++
++Return ONLY valid JSON.
++
++Schema:
++
++{{
++  "bugs": [
++    {{
++      "description": "text",
++      "line": 1,
++      "recommendation": "text"
++    }}
++  ],
++  "security": [
++    {{
++      "description": "text",
++      "line": 1,
++      "recommendation": "text"
++    }}
++  ],
++  "quality": [
++    {{
++      "description": "text",
++      "line": 1,
++      "recommendation": "text"
++    }}
++  ]
++}}
++
++Examples:
++
++Valid:
++{{
++  "security": [
++    {{
++      "description": "Hardcoded API token in source code",
++      "line": 14,
++      "recommendation": "Move the token to an environment variable and load it at runtime."
++    }}
++  ]
++}}
++
++Invalid:
++{{
++  "security": [
++    {{
++      "description": "This code may be insecure",
++      "line": 1,
++      "recommendation": "Improve security"
++    }}
++  ]
++}}
++
++Git Diff:
++
++{patch}
++"""
++    
++    return client.generate(prompt)
+\ No newline at end of file
