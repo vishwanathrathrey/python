@@ -1,0 +1,25 @@
+from app.review_engine import get_diff_files, review_file
+from app.report_builder import build_report
+from app.markdown_reporter import generate_markdown
+from app.report_writer import save_report
+
+all_findings = []
+
+for file in get_diff_files():
+    if not str(file).endswith(".py.diff"):
+        continue
+    if "test_" in str(file):
+        continue
+    findings = review_file(str(file))
+    all_findings.extend(findings)
+
+report = build_report(all_findings)
+
+markdown = generate_markdown(report)
+
+save_report(
+    markdown,
+    "reports/review_report.md"
+)
+
+print("Report generated.")
