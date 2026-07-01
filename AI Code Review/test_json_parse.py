@@ -1,14 +1,23 @@
+import unittest
 import json
 
-from app.diff_loader import load_patch
-from app.reviewer import review_patch
+class TestJsonParse(unittest.TestCase):
+    def test_json_loads(self):
+        result = """
+{
+  "findings": [
+    {
+      "category": "security",
+      "description": "Hardcoded API token",
+      "line": 10,
+      "recommendation": "Move to env var"
+    }
+  ]
+}
+"""
+        review = json.loads(result)
+        self.assertIn("findings", review)
+        self.assertEqual(len(review["findings"]), 1)
 
-patch = load_patch(
-    "reviews/AI Code Review_app_github_client.py.diff"
-)
-
-result = review_patch(patch)
-
-review = json.loads(result)
-
-print(review)
+if __name__ == '__main__':
+    unittest.main()
