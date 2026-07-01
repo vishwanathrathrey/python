@@ -13,5 +13,5 @@ reviews/*.diff
 reports/*.md
 reports/*.html
 reports/*.txt
-
+.vscode/
 logs/
