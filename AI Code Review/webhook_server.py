@@ -5,6 +5,9 @@ from app.report_service import generate_review_report
 from app.user_registry import get_user_email
 from app.email_service import send_report_email
 from app.review_scope import get_pr_file_exclusion_reason, should_review_pr_file
+from app.comment_formatter import build_pr_review_comment
+from app.github_review_poster import post_review_comment
+import os
 
 app = Flask(__name__)
 
@@ -98,6 +101,20 @@ def webhook():
     print(f"Saved {len(saved_diff_paths)} review diffs for this webhook run")
 
     report, html = generate_review_report(saved_diff_paths)
+
+    review_comment = build_pr_review_comment(report.findings)
+
+    github_token = os.getenv("GITHUB_TOKEN")
+    if github_token and report.findings:
+        status = post_review_comment(
+            owner,
+            repo_name_only,
+            pr_number,
+            github_token,
+            review_comment
+        )
+        print(f"GitHub review comment status: {status}")
+        
     email = get_user_email(author)
 
     if email:

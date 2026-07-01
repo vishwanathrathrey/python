@@ -1,0 +1,10 @@
+File: AI Code Review_app_bad_example.py.diff
+            Line: 24
+
+            [Critical] [High Confidence]
+
+            Division by zero
+
+            Recommendation:
+            Validate the divisor before performing the division.
+--------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 from app.models import ReviewFinding
 from app.finding_filter import is_valid_finding
-from app.severity_classifier import classify_severity
+from app.severity_classifier import classify_severity, classify_confidence
 
 def parse_review(review_json):
     findings = []
@@ -14,10 +14,7 @@ def parse_review(review_json):
                 item.get("message", "")
             )
 
-            line = item.get(
-                "line",
-                item.get("line_number", 0)
-            )
+            line = int(item.get("line", item.get("line_number", 0)))
 
             recommendation = item.get(
                 "recommendation",
@@ -27,15 +24,35 @@ def parse_review(review_json):
             if not is_valid_finding(description):
                 continue
 
+            print("PARSED FINDING:")
+            print(
+                {
+                    "category": category,
+                    "description": description,
+                    "line": line,
+                    "recommendation": recommendation,
+                }
+            )
+
             findings.append(
                 ReviewFinding(
                     category=category,
-                    severity=classify_severity(category, description),
+                    severity=classify_severity(
+                        category,
+                        description
+                    ),
+                    confidence=classify_confidence(
+                        category,
+                        description
+                    ),
                     description=description,
                     recommendation=recommendation,
                     line=line,
                     filename=""
                 )
             )
+
+            print("PARSED FINDINGS LIST:")
+            print(findings)
 
     return findings

@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 @dataclass
 class ChangedFile:
@@ -14,7 +14,10 @@ class ReviewFinding:
     recommendation: str
     line: int
     filename: str
+    confidence: str = "Medium"
 
 @dataclass
 class ReviewReport:
     findings: list
+    file_summary: dict = field(default_factory=dict)
+    count_summary: dict = field(default_factory=dict)
